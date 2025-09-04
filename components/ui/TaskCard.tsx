@@ -1,0 +1,34 @@
+import { Task } from "@/types";
+import React, { useState } from "react";
+import TaskCardModal from "../modals/TaskCardModal";
+
+interface TaskCardProps {
+  task: Task;
+}
+
+export default function TaskCard({ task }: TaskCardProps) {
+  const [active, setActive] = useState<boolean>(false);
+
+  return (
+    <div
+      onClick={() => setActive(true)}
+      className="rounded-sm p-4 min-h-[100px] cursor-pointer group flex flex-col justify-center gap-3 containers shadow-lg shadow-[#635fc7]/5"
+    >
+      <h3 className="font-bold group-hover:text-[#635fc7] transition-all duration-100 ease-in-out">
+        {task.title}
+      </h3>
+
+      <p className="text-[0.8rem] text-grey font-bold">
+        {task.subtasks.filter((st) => st.isCompleted).length} of{" "}
+        {task.subtasks.length} Subtasks
+      </p>
+
+      <TaskCardModal
+        active={active}
+        setActive={setActive}
+        task={task}
+        name={task.title}
+      />
+    </div>
+  );
+}
