@@ -6,10 +6,10 @@ import { eq, and, inArray } from "drizzle-orm";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { boardName: string } }
+  context: { params: { boardName: string } } // <- plain object
 ) {
   try {
-    const { boardName } = params;
+    const { boardName } = context.params;
 
     //GETTING THE USER SESSION
     const session = await auth.api.getSession({ headers: req.headers });
