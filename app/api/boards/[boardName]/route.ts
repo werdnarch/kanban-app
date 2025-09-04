@@ -9,7 +9,7 @@ export async function GET(
   { params }: { params: { boardName: string } }
 ) {
   try {
-    const { boardName } = await params;
+    const { boardName } = params;
 
     //GETTING THE USER SESSION
     const session = await auth.api.getSession({ headers: req.headers });
