@@ -3,7 +3,7 @@ import { auth } from "@/lib/auth";
 import { db } from "@/db/drizzle";
 import { boards, columns } from "@/db/schema";
 import { v4 as uuidv4 } from "uuid";
-import { eq } from "drizzle-orm";
+import { eq, desc } from "drizzle-orm";
 
 export async function POST(req: NextRequest) {
   try {
@@ -75,6 +75,7 @@ export async function GET(req: NextRequest) {
     const userBoards = await db
       .select()
       .from(boards)
+      .orderBy(desc(boards.createdAt))
       .where(eq(boards.user_id, user.id));
 
     return NextResponse.json(

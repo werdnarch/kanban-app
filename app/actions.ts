@@ -100,3 +100,29 @@ export async function addNewTask({
     };
   }
 }
+
+export async function getHomePageBoard() {
+  try {
+    const res = await fetch("/api/boards/home");
+
+    if (!res.ok) {
+      const errorData = await res.json().catch(() => null);
+      throw new Error(
+        errorData?.message || `HTTP error! status: ${res.status}`
+      );
+    }
+
+    const data = await res.json();
+
+    return {
+      success: true,
+      data: data,
+      message: "Board successfully fetched",
+    };
+  } catch (err) {
+    return {
+      success: false,
+      error: (err as Error).message,
+    };
+  }
+}
