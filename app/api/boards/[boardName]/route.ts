@@ -5,7 +5,7 @@ import { boards, columns, subtasks, tasks } from "@/db/schema";
 import { eq, and, inArray } from "drizzle-orm";
 
 export async function GET(
-  req: Request,
+  req: NextRequest,
   context: { params: Promise<{ boardName: string }> }
 ) {
   try {
@@ -75,6 +75,15 @@ export async function GET(
         { status: 200 }
       );
     }
+
+    // If no board found, return appropriate response
+    return NextResponse.json(
+      {
+        success: false,
+        error: "Board not found",
+      },
+      { status: 404 }
+    );
   } catch (err) {
     return NextResponse.json(
       {

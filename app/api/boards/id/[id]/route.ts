@@ -7,10 +7,10 @@ import { slugify } from "@/helpers/slugify";
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const { id } = await params;
 
     //GETTING THE USER SESSION
     const session = await auth.api.getSession({ headers: req.headers });
@@ -41,12 +41,13 @@ export async function DELETE(
     );
   }
 }
+
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const { id } = await params;
     const { board } = await req.json();
 
     //GETTING THE USER SESSION
