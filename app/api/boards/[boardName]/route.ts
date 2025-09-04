@@ -5,11 +5,12 @@ import { boards, columns, subtasks, tasks } from "@/db/schema";
 import { eq, and, inArray } from "drizzle-orm";
 
 export async function GET(
-  req: NextRequest,
-  context: { params: { boardName: string } } // <- plain object
+  req: Request,
+  context: { params: Promise<{ boardName: string }> }
 ) {
   try {
-    const { boardName } = context.params;
+    // Await the params before destructuring
+    const { boardName } = await context.params;
 
     //GETTING THE USER SESSION
     const session = await auth.api.getSession({ headers: req.headers });
