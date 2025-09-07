@@ -69,3 +69,11 @@ export type AddTaskData = {
   currentStatus: Column;
   subtasks: { subtask_name: string }[];
 };
+
+export type EditTaskData = {
+  currentStatus: Column;
+  description: string;
+  id: string;
+  name: string;
+  subtasks: { subtask_name: string }[];
+};

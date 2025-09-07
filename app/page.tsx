@@ -41,6 +41,7 @@ export default function Page() {
                 key={`column-${index}`}
                 name={column.name}
                 tasks={column.tasks}
+                columns={board.columns}
               />
             ))
           ) : (

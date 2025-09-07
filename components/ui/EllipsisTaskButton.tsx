@@ -6,13 +6,16 @@ import { Task } from "@/types";
 
 interface EllipsisProps {
   taskData: Task;
+  setTask: (tab: "edit" | "delete" | "view") => void;
 }
 
-export default function EllipsisTaskButton({ taskData }: EllipsisProps) {
+export default function EllipsisTaskButton({
+  taskData,
+  setTask,
+}: EllipsisProps) {
   const [active, setActive] = useState(false);
   const popupRef = useRef<HTMLDivElement | null>(null);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
-  const [task, setTask] = useState<"edit" | "delete">("edit");
   const [menu, setMenu] = useState(false);
 
   useClickOutside([popupRef, buttonRef] as React.RefObject<HTMLElement>[], () =>

@@ -45,6 +45,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
                 key={`column-${index}`}
                 name={column.name}
                 tasks={column.tasks}
+                columns={board.columns}
               />
             ))
           )}
